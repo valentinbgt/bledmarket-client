@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ErrorModal from "./components/ErrorModal";
+import FileList from "./components/FileList";
 
 function App() {
   const API_URL = "http://dev-api.bledmarket.fr";
@@ -45,17 +46,8 @@ function App() {
       </header>
       <main>
         <h1>Bienvenue sur BledMarket</h1>
-        {fileList.length < 1 && <p>Aucun fichier</p>}
 
-        <ul className="list-group">
-          {fileList.map((file: any) => (
-            <>
-              <li key={file.file_public_id} className="list-group-item">
-                {file.file_name}
-              </li>
-            </>
-          ))}
-        </ul>
+        <FileList fileList={fileList} />
       </main>
       <footer>c - BledMarket 2024</footer>
     </>
