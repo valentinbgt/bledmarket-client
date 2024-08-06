@@ -7,64 +7,57 @@ function App() {
   const [fileList, setFileList] = useState([]);
 
   async function updateFileList() {
-    const result = await fetch(API_URL + "/files/get?repertory=public");
-    result.json().then((json) => {
-      console.log(json);
-    });
+    try {
+      const result = await fetch(API_URL + "/files/get?repertory=public");
+      if (!result.ok) {
+        setErrorMsg(`HTTP error! status: ${result.status}`);
+        throw new Error(`HTTP error! status: ${result.status}`);
+      }
+
+      const json = await result.json();
+
+      if (typeof json !== typeof {}) {
+        setErrorMsg("Une erreur est survenue. Lors de la requête.");
+      }
+
+      if (json.errorCode !== 1) {
+        setErrorMsg(json.errorCode + ": " + json.errorMessage);
+      }
+
+      setFileList(json.fileList);
+    } catch (error) {
+      setErrorMsg("Error fetching files: " + error);
+    }
   }
 
   useEffect(() => {
     updateFileList();
   }, []);
 
+  const [errorMsg, setErrorMsg] = useState("");
+
   return (
     <>
-      <ErrorModal errorMsg="test" />
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Launch demo modal
-      </button>
+      {errorMsg && <ErrorModal errorMsg={errorMsg} setErrorMsg={setErrorMsg} />}
+
       <header>
         <nav></nav>
       </header>
       <main>
         <h1>Bienvenue sur BledMarket</h1>
+        {fileList.length < 1 && <p>Aucun fichier</p>}
+
+        <ul className="list-group">
+          {fileList.map((file: any) => (
+            <>
+              <li key={file.file_public_id} className="list-group-item">
+                {file.file_name}
+              </li>
+            </>
+          ))}
+        </ul>
       </main>
       <footer>c - BledMarket 2024</footer>
-      <div className="modal">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Modal title</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 }
