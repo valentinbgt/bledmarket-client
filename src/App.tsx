@@ -52,9 +52,30 @@ function App() {
       <main className="d-flex" style={{ flex: "1 1 auto" }}>
         <SideBar />
 
-        <div id="explorerContent" style={{ flex: "1 1 auto" }}>
+        <div
+          id="explorerContent"
+          style={{ flex: "1 1 auto" }}
+          className="position-relative"
+        >
           <DetailsBar />
-          <FileList fileList={fileList} />
+
+          <div className="position-relative h-100">
+            <div className="container">
+              <FileList fileList={fileList} />
+            </div>
+            <div className="position-absolute top-0 end-0 bottom-0 bg-body-tertiary border-start border-top z-1 py-1 container">
+              Details Panel
+            </div>
+          </div>
+
+          <div
+            id="selectionBar"
+            className="position-absolute bottom-0 start-0 end-0 border-top py-1 bg-body"
+          >
+            <div className="container text-secondary fs-6 fw-light">
+              3 éléments
+            </div>
+          </div>
         </div>
       </main>
     </>
