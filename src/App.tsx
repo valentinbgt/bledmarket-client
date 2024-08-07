@@ -16,7 +16,7 @@ function App() {
   // const [path, setPath] = useState("/");
 
   const [fileList, setFileList] = useState([]);
-  // const [currentFileList, setCurrentFileList] = useState([]);
+  const [visibleFileList, setVisibleFileList] = useState([]);
 
   // const [loading, setLoading] = useState(true);
   const [selectedFiles, setSelectedFiles]: any = useState([]);
@@ -39,7 +39,8 @@ function App() {
         setErrorMsg(json.errorCode + ": " + json.errorMessage);
       }
 
-      setFileList(json.fileList);
+      setFileList(await json.fileList);
+      setVisibleFileList(await json.fileList); //DEV ONLY !!!
     } catch (error) {
       setErrorMsg("Error fetching files: " + error);
     }
@@ -49,6 +50,11 @@ function App() {
     updateFileList();
     document.addEventListener("keydown", handleKeyDown, true);
     document.addEventListener("keyup", handleKeyUp, true);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown, true);
+      document.removeEventListener("keyup", handleKeyUp, true);
+    };
   }, []);
 
   const [keysDown, setKeysDown]: any = useState({});
@@ -57,6 +63,13 @@ function App() {
     let obj: any = keysDown;
     obj[e.key] = true;
     setKeysDown(obj);
+
+    //raccourcis
+    if (e.key == "a" && keysDown.Control) {
+      e.preventDefault();
+      console.log("ctrl a");
+      selectFile(true);
+    }
   };
 
   const handleKeyUp = (e: any) => {
@@ -65,7 +78,21 @@ function App() {
     setKeysDown(obj);
   };
 
-  function selectFile(id: string) {
+  const selectFile = (id: string | boolean) => {
+    if (id === true) {
+      console.log(visibleFileList);
+      console.log(fileList);
+
+      let list = visibleFileList.map((file: any) => file.file_public_id);
+
+      console.log(list);
+
+      setSelectedFiles(list);
+
+      console.log("tout sélec");
+      return;
+    }
+
     const add = () =>
       setSelectedFiles((selectedFiles: any) => [...selectedFiles, id]);
     const remove = () =>
@@ -90,7 +117,7 @@ function App() {
       }
       add();
     }
-  }
+  };
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -115,7 +142,7 @@ function App() {
           <div className="position-relative h-100" style={{ flex: "1 1 auto" }}>
             <div className="container pb-5">
               <FileList
-                fileList={fileList}
+                fileList={visibleFileList}
                 selectedFiles={selectedFiles}
                 selectFile={selectFile}
               />
