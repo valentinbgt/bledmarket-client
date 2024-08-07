@@ -3,6 +3,7 @@ import ErrorModal from "./components/ErrorModal";
 import HeaderBar from "./components/HeaderBar";
 import ActionBar from "./components/ActionBar";
 import SideBar from "./components/SideBar";
+import DetailsBar from "./components/DetailsBar";
 import FileList from "./components/FileList";
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         <SideBar />
 
         <div id="explorerContent" style={{ flex: "1 1 auto" }}>
+          <DetailsBar />
           <FileList fileList={fileList} />
         </div>
       </main>
