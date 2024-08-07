@@ -5,6 +5,7 @@ import ActionBar from "./components/ActionBar";
 import SideBar from "./components/SideBar";
 import DetailsBar from "./components/DetailsBar";
 import FileList from "./components/FileList";
+import UploadWindow from "./components/UploadWindow";
 
 function App() {
   const API_URL = "http://dev-api.bledmarket.fr";
@@ -80,6 +81,8 @@ function App() {
               3 éléments
             </div>
           </div>
+
+          <UploadWindow active={false} />
         </div>
       </main>
     </>

@@ -1,0 +1,26 @@
+  
+  
+  
+  .upload-window .accordion-button:focus {
+    box-shadow: none !important;
+  }
+
+  .upload-window .accordion-item:last-of-type{
+    border-radius: 0;
+    border-bottom: 0;
+    border-top-left-radius: var(--bs-accordion-border-radius);
+    overflow: hidden;
+  }
+
+  .upload-window .accordion-item:first-of-type > .accordion-header .accordion-button{
+    border-radius: 0;
+  }
+
+  .upload-window .accordion-button::after{
+    margin-left: 0.5rem !important;
+  }
+
+  .upload-window .accordion-button {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+  }
