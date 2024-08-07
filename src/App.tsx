@@ -55,11 +55,11 @@ function App() {
         <div
           id="explorerContent"
           style={{ flex: "1 1 auto" }}
-          className="position-relative"
+          className="position-relative d-flex flex-column"
         >
           <DetailsBar />
 
-          <div className="position-relative h-100">
+          <div className="position-relative h-100" style={{ flex: "1 1 auto" }}>
             <div className="container">
               <FileList fileList={fileList} />
             </div>
@@ -71,6 +71,7 @@ function App() {
           <div
             id="selectionBar"
             className="position-absolute bottom-0 start-0 end-0 border-top py-1 bg-body"
+            style={{ flex: "0 1 auto" }}
           >
             <div className="container text-secondary fs-6 fw-light">
               3 éléments

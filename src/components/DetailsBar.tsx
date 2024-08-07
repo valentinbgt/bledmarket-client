@@ -1,6 +1,6 @@
 const DetailsBar = () => {
   return (
-    <div className="navbar">
+    <div className="navbar" style={{ flex: "0 1 auto" }}>
       <div className="container-fluid">
         <div>
           <div className="form-check mx-1">
