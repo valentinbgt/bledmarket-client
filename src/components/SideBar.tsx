@@ -11,16 +11,19 @@ const SideBar = () => {
         className="d-flex flex-column container py-2"
       >
         <button type="button" className="btn my-1">
-          Public
+          <i className="bi bi-house"></i> Acceuil
         </button>
         <button type="button" className="btn my-1">
-          Privé
+          <i className="bi bi-folder2-open"></i> Public
+        </button>
+        <button type="button" className="btn my-1">
+          <i className="bi bi-lock"></i> Privé
         </button>
         <button type="button" className="btn my-1 border-0" disabled>
-          Drop
+          <i className="bi bi-share"></i> Drop
         </button>
         <button type="button" className="btn btn-outline-primary my-1" disabled>
-          + Ajouter
+          <i className="bi bi-plus"></i> Ajouter
         </button>
       </div>
       <div

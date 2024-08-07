@@ -17,7 +17,9 @@ const DetailsBar = () => {
         </div>
         <div className="d-flex">
           <div className="input-group mx-1">
-            <span className="input-group-text">Trier : </span>
+            <span className="input-group-text">
+              <i className="bi bi-filter"></i>
+            </span>
             <select className="form-select" aria-label="Sort files">
               <option value="alphabetic" selected>
                 Alphabétique
@@ -29,8 +31,11 @@ const DetailsBar = () => {
             </select>
           </div>
 
-          <button type="button" className="btn btn-outline-primary mx-1">
-            Détails
+          <button
+            type="button"
+            className="btn btn-outline-primary mx-1 text-nowrap"
+          >
+            <i className="bi bi-card-text"></i> Détails
           </button>
         </div>
       </div>
