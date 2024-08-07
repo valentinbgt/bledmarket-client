@@ -65,11 +65,6 @@ function App() {
     setKeysDown(obj);
 
     //raccourcis
-    if (e.key == "a" && keysDown.Control) {
-      e.preventDefault();
-      console.log("ctrl a");
-      selectFile(true);
-    }
   };
 
   const handleKeyUp = (e: any) => {
@@ -79,20 +74,6 @@ function App() {
   };
 
   const selectFile = (id: string | boolean) => {
-    if (id === true) {
-      console.log(visibleFileList);
-      console.log(fileList);
-
-      let list = visibleFileList.map((file: any) => file.file_public_id);
-
-      console.log(list);
-
-      setSelectedFiles(list);
-
-      console.log("tout sélec");
-      return;
-    }
-
     const add = () =>
       setSelectedFiles((selectedFiles: any) => [...selectedFiles, id]);
     const remove = () =>
