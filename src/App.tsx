@@ -6,6 +6,7 @@ import SideBar from "./components/SideBar";
 import DetailsBar from "./components/DetailsBar";
 import FileList from "./components/FileList";
 import UploadWindow from "./components/UploadWindow";
+import DetailsPanel from "./components/DetailsPanel";
 
 function App() {
   const API_URL = "http://dev-api.bledmarket.fr";
@@ -64,12 +65,7 @@ function App() {
             <div className="container pb-5">
               <FileList fileList={fileList} />
             </div>
-            <div
-              className="position-absolute top-0 end-0 bottom-0 bg-body-tertiary border-start border-top z-1 py-1 container"
-              style={{ width: "fit-content" }}
-            >
-              Details Panel
-            </div>
+            <DetailsPanel />
           </div>
 
           <div

@@ -8,7 +8,7 @@ const ActionBar = () => {
             + Dossier
           </button>
           <button type="button" className="btn btn-primary mx-1">
-            + Fichier
+            Fichier
           </button>
         </div>
       </div>
