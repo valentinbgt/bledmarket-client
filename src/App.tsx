@@ -12,14 +12,14 @@ import SelectionBar from "./components/SelectionBar";
 function App() {
   const API_URL = "http://dev-api.bledmarket.fr";
 
-  const [mode, setMode] = useState("home");
-  const [path, setPath] = useState("/");
+  // const [mode, setMode] = useState("home");
+  // const [path, setPath] = useState("/");
 
   const [fileList, setFileList] = useState([]);
-  const [currentFileList, setCurrentFileList] = useState([]);
+  // const [currentFileList, setCurrentFileList] = useState([]);
 
-  const [loading, setLoading] = useState(true);
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  const [selectedFiles, setSelectedFiles]: any = useState([]);
 
   async function updateFileList() {
     try {
@@ -47,10 +47,49 @@ function App() {
 
   useEffect(() => {
     updateFileList();
+    document.addEventListener("keydown", handleKeyDown, true);
+    document.addEventListener("keyup", handleKeyUp, true);
   }, []);
 
+  const [keysDown, setKeysDown]: any = useState({});
+
+  const handleKeyDown = (e: any) => {
+    let obj: any = keysDown;
+    obj[e.key] = true;
+    setKeysDown(obj);
+  };
+
+  const handleKeyUp = (e: any) => {
+    let obj: any = keysDown;
+    obj[e.key] = false;
+    setKeysDown(obj);
+  };
+
   function selectFile(id: string) {
-    console.log(id);
+    const add = () =>
+      setSelectedFiles((selectedFiles: any) => [...selectedFiles, id]);
+    const remove = () =>
+      setSelectedFiles((selectedFiles: any[]) =>
+        selectedFiles.filter((fileId: string) => fileId !== id)
+      );
+
+    if (selectedFiles.includes(id)) {
+      //l'élément cliqué est déjà sélectionné
+      if (selectedFiles.length == 1 || keysDown.Control) {
+        remove();
+      } else {
+        //plusieurs élément sélectionnés
+        //clean and add
+        setSelectedFiles([]);
+        add();
+      }
+    } else {
+      //l'élément cliqué n'est pas sélectionné
+      if (!keysDown.Control) {
+        setSelectedFiles([]);
+      }
+      add();
+    }
   }
 
   const [errorMsg, setErrorMsg] = useState("");
@@ -75,7 +114,11 @@ function App() {
 
           <div className="position-relative h-100" style={{ flex: "1 1 auto" }}>
             <div className="container pb-5">
-              <FileList fileList={fileList} selectFile={selectFile} />
+              <FileList
+                fileList={fileList}
+                selectedFiles={selectedFiles}
+                selectFile={selectFile}
+              />
             </div>
             <DetailsPanel />
           </div>

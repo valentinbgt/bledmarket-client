@@ -20,10 +20,12 @@ const DetailsBar = () => {
             <span className="input-group-text">
               <i className="bi bi-filter"></i>
             </span>
-            <select className="form-select" aria-label="Sort files">
-              <option value="alphabetic" selected>
-                Alphabétique
-              </option>
+            <select
+              className="form-select"
+              aria-label="Sort files"
+              defaultValue="alphabetic"
+            >
+              <option value="alphabetic">Alphabétique</option>
               <option value="heaviest">Plus lourd</option>
               <option value="lightter">Plus léger</option>
               <option value="recent">Plus récent</option>
