@@ -7,11 +7,19 @@ import DetailsBar from "./components/DetailsBar";
 import FileList from "./components/FileList";
 import UploadWindow from "./components/UploadWindow";
 import DetailsPanel from "./components/DetailsPanel";
+import SelectionBar from "./components/SelectionBar";
 
 function App() {
   const API_URL = "http://dev-api.bledmarket.fr";
 
+  const [mode, setMode] = useState("home");
+  const [path, setPath] = useState("/");
+
   const [fileList, setFileList] = useState([]);
+  const [currentFileList, setCurrentFileList] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   async function updateFileList() {
     try {
@@ -41,6 +49,10 @@ function App() {
     updateFileList();
   }, []);
 
+  function selectFile(id: string) {
+    console.log(id);
+  }
+
   const [errorMsg, setErrorMsg] = useState("");
 
   return (
@@ -63,20 +75,12 @@ function App() {
 
           <div className="position-relative h-100" style={{ flex: "1 1 auto" }}>
             <div className="container pb-5">
-              <FileList fileList={fileList} />
+              <FileList fileList={fileList} selectFile={selectFile} />
             </div>
             <DetailsPanel />
           </div>
 
-          <div
-            id="selectionBar"
-            className="position-absolute bottom-0 start-0 end-0 border-top py-1 bg-body"
-            style={{ flex: "0 1 auto" }}
-          >
-            <div className="container text-secondary fs-6 fw-light">
-              3 éléments
-            </div>
-          </div>
+          <SelectionBar />
 
           <UploadWindow active={false} />
         </div>
