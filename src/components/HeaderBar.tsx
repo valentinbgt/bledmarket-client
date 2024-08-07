@@ -1,6 +1,9 @@
 const HeaderBar = () => {
   return (
-    <nav id="headerBar" className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav
+      id="headerBar"
+      className="navbar navbar-expand-lg bg-body-tertiary border-bottom"
+    >
       <div className="container-fluid">
         <p>pp</p>
         <a className="navbar-brand">Vava</a>

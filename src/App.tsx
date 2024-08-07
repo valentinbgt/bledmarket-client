@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import ErrorModal from "./components/ErrorModal";
 import HeaderBar from "./components/HeaderBar";
 import ActionBar from "./components/ActionBar";
-import ErrorModal from "./components/ErrorModal";
+import SideBar from "./components/SideBar";
 import FileList from "./components/FileList";
 
 function App() {
@@ -43,33 +44,15 @@ function App() {
     <>
       {errorMsg && <ErrorModal errorMsg={errorMsg} setErrorMsg={setErrorMsg} />}
 
-      <header className="border-bottom">
+      <header className="border-bottom" style={{ flex: "0 1 auto" }}>
         <HeaderBar />
         <ActionBar />
       </header>
-      <main>
-        <div>
-          <div>
-            <div>
-              <button type="button" className="btn">
-                Public
-              </button>
-              <button type="button" className="btn">
-                Privé
-              </button>
-              <button type="button" className="btn">
-                Drop
-              </button>
-              <button type="button" className="btn btn-primary">
-                + Ajouter
-              </button>
-            </div>
-            <div id="spaceLeft">10% - 5 Go / 50</div>
-          </div>
+      <main className="d-flex" style={{ flex: "1 1 auto" }}>
+        <SideBar />
 
-          <div id="explorerContent">
-            <FileList fileList={fileList} />
-          </div>
+        <div id="explorerContent" style={{ flex: "1 1 auto" }}>
+          <FileList fileList={fileList} />
         </div>
       </main>
     </>
