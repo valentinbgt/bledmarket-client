@@ -49,7 +49,7 @@ function App() {
         <HeaderBar />
         <ActionBar />
       </header>
-      <main className="d-flex" style={{ flex: "1 1 auto" }}>
+      <main className="d-flex border-bottom" style={{ flex: "1 1 auto" }}>
         <SideBar />
 
         <div
@@ -60,10 +60,13 @@ function App() {
           <DetailsBar />
 
           <div className="position-relative h-100" style={{ flex: "1 1 auto" }}>
-            <div className="container">
+            <div className="container pb-5">
               <FileList fileList={fileList} />
             </div>
-            <div className="position-absolute top-0 end-0 bottom-0 bg-body-tertiary border-start border-top z-1 py-1 container">
+            <div
+              className="position-absolute top-0 end-0 bottom-0 bg-body-tertiary border-start border-top z-1 py-1 container"
+              style={{ width: "fit-content" }}
+            >
               Details Panel
             </div>
           </div>
