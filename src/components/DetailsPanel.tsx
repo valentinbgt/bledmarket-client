@@ -71,7 +71,6 @@ const DetailsPanel = ({
       style={{ width: "fit-content", maxWidth: "40%" }}
       hidden={!detailsPanel}
     >
-      <p>Aperçu : {isFileDisplayable(file.file_type)}</p>
       <div>{preview}</div>
 
       <p>{file.file_name}</p>
