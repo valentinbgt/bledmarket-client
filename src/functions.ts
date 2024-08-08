@@ -37,3 +37,47 @@ export const formatDate = (timestamp: number) => {
 
     return formatted;
 }
+
+export const isFileDisplayable = (mime: string): string | false => {
+    var iframe = [
+        "text/plain",
+        "text/html",
+        "text/css",
+        "text/javascript",
+        "application/javascript",
+        "application/x-javascript",
+        "application/pdf",
+        "application/json",
+        "application/xml",
+        "application/xhtml+xml"
+    ];
+
+    var image = [
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
+        "image/webp",
+        "image/avif"
+    ]
+
+    var audio = [
+        "audio/mpeg",
+        "audio/ogg",
+        "audio/wav",
+        "audio/webm"
+    ];
+
+    var video = [
+        "video/mp4",
+        "video/webm",
+        "video/ogg"
+    ] ;
+
+
+    if(iframe.includes(mime)) return "IFRAME";
+    if(image.includes(mime)) return "IMAGE";
+    if(audio.includes(mime)) return "AUDIO";
+    if(video.includes(mime)) return "VIDEO";
+    return false;
+}
