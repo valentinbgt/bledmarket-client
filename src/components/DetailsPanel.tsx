@@ -22,6 +22,7 @@ const DetailsPanel = ({
     file = selectedFile[0];
   }
 
+  if (!detailsPanel) return;
   if (!file) return;
   if (file.file_is_folder) return;
   if (!file.file_is_uploaded) return;
@@ -67,11 +68,10 @@ const DetailsPanel = ({
 
   return (
     <div
-      className="position-absolute top-0 end-0 bottom-0 bg-body-tertiary border-start border-top z-1 py-1 container d-flex flex-column"
+      className="position-absolute top-0 end-0 bottom-0 bg-body-tertiary border-start border-top z-1 py-2 container d-flex flex-column"
       style={{ width: "fit-content", maxWidth: "40%" }}
-      hidden={!detailsPanel}
     >
-      <div>{preview}</div>
+      <div className="rounded overflow-hidden">{preview}</div>
 
       <p>{file.file_name}</p>
       <p>{formatSizeUnit(file.file_size)}</p>
