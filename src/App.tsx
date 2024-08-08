@@ -122,6 +122,7 @@ function App() {
           selectedFiles={selectedFiles}
           selectFile={selectFile}
           loading={loading}
+          API_URL={API_URL}
         />
       </main>
     </>

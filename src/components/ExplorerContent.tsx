@@ -10,6 +10,7 @@ interface Props {
   selectedFiles: string[];
   selectFile: (file: string) => void;
   loading: boolean;
+  API_URL: string;
 }
 
 const ExplorerContent = ({
@@ -17,6 +18,7 @@ const ExplorerContent = ({
   selectedFiles,
   selectFile,
   loading,
+  API_URL,
 }: Props) => {
   const [detailsPanel, setDetailsPanel] = useState(true);
 
@@ -45,6 +47,7 @@ const ExplorerContent = ({
           detailsPanel={detailsPanel}
           fileList={visibleFileList}
           selectedFiles={selectedFiles}
+          API_URL={API_URL}
         />
       </div>
 
