@@ -1,3 +1,5 @@
+import { formatSizeUnit } from "../functions.js";
+
 interface Props {
   fileList: any[];
   selectedFiles: string[];
@@ -33,7 +35,7 @@ const SelectionBar = ({ fileList, selectedFiles }: Props) => {
       style={{ flex: "0 1 auto" }}
     >
       <div className="container text-secondary fs-6 fw-light">
-        {numEl} élément{numEl > 1 ? "s" : ""} - {size}
+        {numEl} élément{numEl > 1 ? "s" : ""} - {formatSizeUnit(size)}
       </div>
     </div>
   );
