@@ -41,7 +41,11 @@ const ExplorerContent = ({
             loading={loading}
           />
         </div>
-        <DetailsPanel detailsPanel={detailsPanel} />
+        <DetailsPanel
+          detailsPanel={detailsPanel}
+          fileList={visibleFileList}
+          selectedFiles={selectedFiles}
+        />
       </div>
 
       <SelectionBar fileList={visibleFileList} selectedFiles={selectedFiles} />

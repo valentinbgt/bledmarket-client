@@ -20,3 +20,20 @@ export const formatUnits = (bytes: number) => {
 export const formatSizeUnit = (bytes: number) => {
     return formatSize(bytes) + ' ' + formatUnits(bytes);
 };
+
+export const formatDate = (timestamp: number) => {
+    let date = new Date(timestamp * 1000);
+
+    let formatted =
+      ("0" + date.getDate()).slice(-2) +
+      "/" +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
+      "/" +
+      date.getFullYear() +
+      " " +
+      date.getHours() +
+      "h" +
+      date.getMinutes();
+
+    return formatted;
+}
