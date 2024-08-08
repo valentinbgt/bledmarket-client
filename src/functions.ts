@@ -82,3 +82,12 @@ export const isFileDisplayable = (mime: string): string | false => {
     if(video.includes(mime)) return "VIDEO";
     return false;
 }
+
+export const request = (
+  uri: string,
+  params: any[],
+  method: string,
+  then: () => void
+)  => {
+  //fetch
+}

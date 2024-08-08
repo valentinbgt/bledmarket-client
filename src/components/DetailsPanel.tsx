@@ -1,5 +1,8 @@
 import { formatSizeUnit, formatDate, isFileDisplayable } from "../functions.ts";
 
+//dev
+import axios from "axios";
+
 interface Props {
   detailsPanel: boolean;
   fileList: any[];
@@ -83,6 +86,24 @@ const DetailsPanel = ({
           ? "Fichier partagé : " + file.file_shared_id
           : "Fichier non partagé"}
       </p>
+
+      <button
+        onClick={() => {
+          const repertory = "public";
+
+          axios
+            .get("http://dev-api.bledmarket.fr/files/get?repertory=public", {
+              params: {
+                repertory: repertory,
+              },
+            })
+            .then((response) => {
+              console.log(response);
+            });
+        }}
+      >
+        test
+      </button>
     </div>
   );
 };
