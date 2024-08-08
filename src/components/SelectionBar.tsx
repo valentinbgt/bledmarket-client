@@ -1,4 +1,4 @@
-import { formatSizeUnit } from "../functions.js";
+import { formatSizeUnit } from "../functions.ts";
 
 interface Props {
   fileList: any[];
