@@ -44,7 +44,7 @@ const ExplorerContent = ({
         <DetailsPanel detailsPanel={detailsPanel} />
       </div>
 
-      <SelectionBar />
+      <SelectionBar fileList={visibleFileList} selectedFiles={selectedFiles} />
       <UploadWindow active={false} />
     </div>
   );

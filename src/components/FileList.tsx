@@ -20,6 +20,9 @@ const FileList = ({ fileList, selectedFiles, selectFile, loading }: Props) => {
                     : "list-group-item"
                 }
                 onClick={() => selectFile(file.file_public_id)}
+                onDoubleClick={() =>
+                  console.log("Donwload ", file.file_name, file.file_public_id)
+                }
               >
                 {file.file_name}
               </li>
