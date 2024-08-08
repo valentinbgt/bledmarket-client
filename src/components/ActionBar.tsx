@@ -1,4 +1,9 @@
-const ActionBar = () => {
+interface Props {
+  loading: boolean;
+  reloadHandler: () => void;
+}
+
+const ActionBar = ({ loading, reloadHandler }: Props) => {
   return (
     <div id="actionBar" className="navbar">
       <div className="container-fluid">
@@ -13,8 +18,19 @@ const ActionBar = () => {
           <button type="button" className="btn btn-outline-primary mx-1">
             <i className="bi bi-arrow-up"></i>
           </button>
-          <button type="button" className="btn btn-outline-primary mx-1">
-            <i className="bi bi-arrow-clockwise"></i>
+          <button
+            type="button"
+            className="btn btn-outline-primary mx-1"
+            onClick={reloadHandler}
+          >
+            {loading ? (
+              <div
+                className="spinner-border spinner-border-sm"
+                role="status"
+              ></div>
+            ) : (
+              <i className="bi bi-arrow-clockwise"></i>
+            )}
           </button>
 
           <div className="vr mx-2"></div>

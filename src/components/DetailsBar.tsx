@@ -1,4 +1,9 @@
-const DetailsBar = () => {
+interface Props {
+  togglePanel: () => void;
+  detailsPanel: boolean;
+}
+
+const DetailsBar = ({ togglePanel, detailsPanel }: Props) => {
   return (
     <div className="navbar" style={{ flex: "0 1 auto" }}>
       <div className="container-fluid">
@@ -35,7 +40,12 @@ const DetailsBar = () => {
 
           <button
             type="button"
-            className="btn btn-outline-primary mx-1 text-nowrap"
+            className={
+              detailsPanel
+                ? "btn btn-outline-primary mx-1 text-nowrap"
+                : "btn btn-outline-secondary mx-1 text-nowrap"
+            }
+            onClick={() => togglePanel()}
           >
             <i className="bi bi-card-text"></i> Détails
           </button>

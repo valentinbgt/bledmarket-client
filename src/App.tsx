@@ -3,11 +3,7 @@ import ErrorModal from "./components/ErrorModal";
 import HeaderBar from "./components/HeaderBar";
 import ActionBar from "./components/ActionBar";
 import SideBar from "./components/SideBar";
-import DetailsBar from "./components/DetailsBar";
-import FileList from "./components/FileList";
-import UploadWindow from "./components/UploadWindow";
-import DetailsPanel from "./components/DetailsPanel";
-import SelectionBar from "./components/SelectionBar";
+import ExplorerContent from "./components/ExplorerContent";
 
 function App() {
   const API_URL = "http://dev-api.bledmarket.fr";
@@ -18,11 +14,13 @@ function App() {
   const [fileList, setFileList] = useState([]);
   const [visibleFileList, setVisibleFileList] = useState([]);
 
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles]: any = useState([]);
 
-  async function updateFileList() {
+  async function updateFileList(hideReload?: boolean) {
     try {
+      if (!hideReload) setLoading(true);
+
       const result = await fetch(API_URL + "/files/get?repertory=public");
       if (!result.ok) {
         setErrorMsg(`HTTP error! status: ${result.status}`);
@@ -41,6 +39,8 @@ function App() {
 
       setFileList(await json.fileList);
       setVisibleFileList(await json.fileList); //DEV ONLY !!!
+
+      setLoading(false);
     } catch (error) {
       setErrorMsg("Error fetching files: " + error);
     }
@@ -56,6 +56,10 @@ function App() {
       document.removeEventListener("keyup", handleKeyUp, true);
     };
   }, []);
+
+  const reloadHandler = () => {
+    updateFileList();
+  };
 
   const [keysDown, setKeysDown]: any = useState({});
 
@@ -108,33 +112,17 @@ function App() {
 
       <header className="border-bottom" style={{ flex: "0 1 auto" }}>
         <HeaderBar />
-        <ActionBar />
+        <ActionBar loading={loading} reloadHandler={reloadHandler} />
       </header>
       <main className="d-flex border-bottom" style={{ flex: "1 1 auto" }}>
         <SideBar />
 
-        <div
-          id="explorerContent"
-          style={{ flex: "1 1 auto" }}
-          className="position-relative d-flex flex-column"
-        >
-          <DetailsBar />
-
-          <div className="position-relative h-100" style={{ flex: "1 1 auto" }}>
-            <div className="container pb-5">
-              <FileList
-                fileList={visibleFileList}
-                selectedFiles={selectedFiles}
-                selectFile={selectFile}
-              />
-            </div>
-            <DetailsPanel />
-          </div>
-
-          <SelectionBar />
-
-          <UploadWindow active={false} />
-        </div>
+        <ExplorerContent
+          visibleFileList={visibleFileList}
+          selectedFiles={selectedFiles}
+          selectFile={selectFile}
+          loading={loading}
+        />
       </main>
     </>
   );
