@@ -65,6 +65,7 @@ export const isFileDisplayable = (mime: string): string | false => {
         "audio/mpeg",
         "audio/ogg",
         "audio/wav",
+        "audio/wave",
         "audio/webm"
     ];
 
