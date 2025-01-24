@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const formatSize = (bytes: number) => {
     if      (bytes >= 1073741824) { bytes = (bytes / 1073741824); }
     else if (bytes >= 1048576)    { bytes = (bytes / 1048576); }
@@ -83,11 +85,98 @@ export const isFileDisplayable = (mime: string): string | false => {
     return false;
 }
 
-export const request = (
-  uri: string,
-  params: any[],
-  method: string,
-  then: () => void
-)  => {
-  //fetch
-}
+// export const request = (
+//   uri: string,
+//   params: any[],
+//   method: string,
+//   then: () => void
+// )  => {
+//   //fetch
+// }
+
+export const request = (action: string[], params: any, then: (response: any) => void ) => {
+    const actions: any = {
+      files: {
+        get: {
+          method: "GET",
+          params: ["repertory"],
+        },
+        download: {
+          method: "GET",
+        },
+        add: {
+          method: "POST",
+        },
+        delete: {
+          method: "POST",
+        },
+        rename: {
+          method: "POST",
+        },
+        move: {
+          method: "POST",
+        },
+        newFolder: {
+          method: "POST",
+        },
+      },
+      users: {
+        login: {
+          method: "POST",
+        },
+        signup: {
+          method: "POST",
+        },
+        password_change: {
+          method: "POST",
+        },
+        logout: {
+          method: "POST",
+        },
+        is_connected: {
+          method: "GET",
+        },
+        verify: {
+          method: "GET",
+        },
+      },
+    };
+  
+    const actionParams = actions[action[0]][action[1]];
+  
+    if (actionParams.method == "GET") {
+    //   console.log(`http://dev-api.bledmarket.fr/${action[0]}/${action[1]}`);
+
+      axios
+        .get(`http://dev-api.bledmarket.fr/${action[0]}/${action[1]}`, params)
+        .then((response) => {
+          then(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+    } else if (actionParams.method == "POST") {
+
+        axios
+        .post(`http://dev-api.bledmarket.fr/${action[0]}/${action[1]}`, params)
+        .then((response) => {
+          then(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+    }
+  
+    //   axios
+    //     .post("https://reqres.in/api/login", {
+    //       email,
+    //       password,
+    //     })
+    //     .then((response) => {
+    //       console.log(response);
+    //     });
+  
+    return;
+  };

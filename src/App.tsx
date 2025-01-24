@@ -4,6 +4,8 @@ import HeaderBar from "./components/HeaderBar";
 import ActionBar from "./components/ActionBar";
 import SideBar from "./components/SideBar";
 import ExplorerContent from "./components/ExplorerContent";
+// import Request from "./components/Request";
+import { request } from "./functions";
 
 function App() {
   const API_URL = "http://dev-api.bledmarket.fr";
@@ -50,6 +52,13 @@ function App() {
     updateFileList();
     document.addEventListener("keydown", handleKeyDown, true);
     document.addEventListener("keyup", handleKeyUp, true);
+    request(
+      ["files", "newFolder"],
+      { repertory: "public", path: "/" },
+      (response) => {
+        console.log("request: ", response);
+      }
+    );
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown, true);
